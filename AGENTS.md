@@ -8,20 +8,15 @@
 - Schrijf tests in Pest-stijl met `it(...)`.
 - Voorkom N+1-queries: gebruik `with()` bij het ophalen van relaties in
 lijsten.
-- Test casts en berekeningen op het model zelf (`make()` of `new`), niet
-via `create()->fresh()`, want de database corrigeert waarden stilletjes.
+- Test casts en berekeningen op het model zelf (`make()` of `new`), niet via `create()->fresh()`, want de database corrigeert waarden stilletjes.
+- `RefreshDatabase` staat centraal in `tests/Pest.php` voor alle Feature-tests. Zet geen `uses(RefreshDatabase::class)` in losse testbestanden.
 
 ## Werkwijze
 
-- Draai `composer check` op de host voordat je zegt dat een taak klaar is.
-Los fouten op tot het slaagt.
-- Gebruik geen Docker of Sail. Coverage, mutation testing, TIA en Xdebug
-draait de gebruiker zelf via `./vendor/bin/sail`.
-- Voeg geen pakketten toe zonder akkoord van de gebruiker. Na `composer
-require` draait de gebruiker `php artisan boost:update --discover`, na
-`composer update` `php artisan boost:update`.
-- Rector hoort niet in `composer check`. Draai `composer rector:check`
-alleen op verzoek.
+- Draai `composer check` op de host voordat je zegt dat een taak klaar is. Los fouten op tot het slaagt. En beschrijf welke fouten er waren.
+- Gebruik geen Docker of Sail. Coverage, mutation testing, TIA en Xdebug draait de gebruiker zelf via `./vendor/bin/sail`.
+- Voeg geen pakketten toe zonder akkoord van de gebruiker. Na `composer require` draait de gebruiker `php artisan boost:update --discover`, na `composer update` `php artisan boost:update`.
+- Rector hoort niet in `composer check`. Draai `composer rector:check` alleen op verzoek.
 
 === foundation rules ===
 
@@ -121,6 +116,16 @@ This project has domain-specific skills available in `**/skills/**`. You MUST ac
 
 - Laravel can be deployed using [Laravel Cloud](https://cloud.laravel.com/), which is the fastest way to deploy and scale production Laravel applications.
 - Activate the `deploying-to-cloud` skill whenever deploying to Laravel Cloud, configuring Cloud environments or resources, using the Cloud CLI, or troubleshooting Cloud deployments.
+
+=== tests rules ===
+
+# Test Enforcement
+
+- Add or update tests for behavior and logic changes when a test provides meaningful regression coverage.
+- Pure copy, styling, and layout-only changes do not require new or updated tests.
+- When test coverage applies, run the affected tests and ensure they pass.
+- Test the changed behavior and its important failure modes, but do not add tests beyond them.
+- Read the `testing-best-practices` skill before writing tests.
 
 === laravel/core rules ===
 

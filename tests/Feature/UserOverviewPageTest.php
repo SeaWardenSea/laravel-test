@@ -1,9 +1,9 @@
 <?php
 
+use App\Http\Controllers\UserOverviewController;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
-uses(RefreshDatabase::class);
+mutates(UserOverviewController::class);
 
 it('shows all users from the database on the users page', function () {
     $users = User::factory(3)->create();
